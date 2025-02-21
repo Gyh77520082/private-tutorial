@@ -1,0 +1,13 @@
+[Unit]  
+Description=RabbitMQ broker  
+After=network.target  
+ 
+[Service]  
+Type=simple  
+User=rabbitmq  
+Group=rabbitmq  
+ExecStart=/usr/sbin/rabbitmq-server start  
+Restart=always  
+ 
+[Install]  
+WantedBy=multi-user.target

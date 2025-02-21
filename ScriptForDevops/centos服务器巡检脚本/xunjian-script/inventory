@@ -1,0 +1,22 @@
+[xunjian]
+# 需要巡检的主机ip
+# ansible_user：使用的ssh登录账号
+# ansible_password：ssh登录账号的密码
+# ansible_become_pass：若ansible.cfg中配置提权方式"become_method"配置为su，则填root密码；若提权方式为sudo，则填ssh登录账号的密码(默认为sudo)
+# ansible_ssh_port：ssh端口(默认22）
+# 禁止使用root直连的方式
+# 例：
+# 127.0.0.3 ansible_user="普通user" ansible_password="普通user密码" ansible_become_pass="普通user密码"
+
+## !!!用完账号密码记得删
+
+
+
+
+
+####### 若这一批服务器的账号密码都一样，上面可以只填ip，解开"[xunjian:vars]"注释，填入对应的账号密码就行
+# [xunjian:vars]
+# ansible_user=""
+# ansible_password=""
+# ansible_become_pass=""
+# ansible_ssh_port=""
