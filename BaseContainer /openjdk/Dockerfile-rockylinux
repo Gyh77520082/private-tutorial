@@ -1,0 +1,7 @@
+FROM harbor.189ip.cn:18000/gysk_basis/rockylinux:8.9-minimal
+
+RUN microdnf makecache
+RUN microdnf install java-1.8.0-openjdk
+
+ENV JAVA_HOME=/usr/lib/jvm/jre
+ENV PATH=$JAVA_HOME/bin:$PATH
