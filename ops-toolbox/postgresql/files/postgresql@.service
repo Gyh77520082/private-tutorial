@@ -1,0 +1,15 @@
+[Unit]
+Description=PostgreSQL Server
+Requires=network-online.target
+After=network.target
+
+[Service]
+Type=forking
+User=postgres
+Group=postgres
+ExecStart=/usr/local/postgresql/bin/pg_ctl $PGOPTS start
+ExecReload=/usr/local/postgresql/bin/pg_ctl $PGOPTS reload
+ExecStop=/usr/local/postgresql/bin/pg_ctl $PGOPTS stop
+
+[Install]
+WantedBy=multi-user.target
