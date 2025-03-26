@@ -1,5 +1,0 @@
----
-# 巡检脚本的根目录
-xunjian_dir: "/opt/xunjian"
-# 巡检结果的文件
-xunjian_scan_result_file: "{{ xunjian_dir }}/log"

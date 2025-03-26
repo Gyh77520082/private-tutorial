@@ -1,6 +1,0 @@
----
-- name: shell xunjian script
-  become: yes
-  become_user: root
-  shell: |
-    /bin/bash {{ xunjian_dir }}/main.sh

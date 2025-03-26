@@ -1,6 +1,0 @@
-kubernetes:
-  namespace: "default"
-redis:
-  name: "fs-smp-redis"
-  port: 6379
-  password: "hRmrfEkc9K2Z!"

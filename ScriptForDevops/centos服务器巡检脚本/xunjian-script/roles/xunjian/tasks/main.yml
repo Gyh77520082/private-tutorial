@@ -1,5 +1,0 @@
----
-- import_tasks: mkdir.yml
-- import_tasks: template.yml
-- import_tasks: shell.yml
-- import_tasks: fetch.yml
