@@ -1,0 +1,58 @@
+{{- if eq .Values.useStatefulSet true }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    k8s.kuboard.cn/displayName: app服务
+  labels:
+    {{- include "kube.labels" . | nindent 4 }}
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.kubernetes.namespace }}
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      {{- include "kube.labels" . | nindent 6 }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        {{- include "kube.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - args:
+            {{- include "container.args" . | nindent 12 }}
+          command:
+            - java
+          image: {{ include "container.image" . }}
+          imagePullPolicy: IfNotPresent
+          name: fs-smp-app
+          resources:
+            limits:
+              cpu: '1'
+              memory: 4Gi
+            requests:
+              cpu: '1'
+              memory: 4Gi
+          volumeMounts:
+            - mountPath: {{ .Values.mountPath }}
+              name: {{ .Release.Name }}-volume0
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: py-harbor
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: {{ .Release.Name }}-volume0
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-pvc
+{{- end }}

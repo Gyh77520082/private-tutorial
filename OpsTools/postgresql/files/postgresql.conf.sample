@@ -1,0 +1,116 @@
+# -----------------------------
+# PostgreSQL configuration file
+# -----------------------------
+
+#------------------------------------------------------------------------------
+# FILE LOCATIONS
+#------------------------------------------------------------------------------
+data_directory = '/data/postgresql/#POSTGRESQL_PORT#/data'
+hba_file = '/data/postgresql/#POSTGRESQL_PORT#/data/pg_hba.conf'
+ident_file = '/data/postgresql/#POSTGRESQL_PORT#/data/pg_ident.conf'
+#------------------------------------------------------------------------------
+# CONNECTIONS AND AUTHENTICATION
+#------------------------------------------------------------------------------
+# - Connection Settings -
+listen_addresses = '0.0.0.0'
+port = #POSTGRESQL_PORT#
+max_connections = 100
+unix_socket_directories = '/tmp'
+unix_socket_group = 'postgres'
+unix_socket_permissions = 0750
+# - TCP settings -
+tcp_keepalives_idle = 300
+tcp_keepalives_interval = 60
+tcp_keepalives_count = 0
+tcp_user_timeout = 120000
+# - Authentication -
+authentication_timeout = 10s
+password_encryption = scram-sha-256
+# - SSL -
+ssl = off
+#------------------------------------------------------------------------------
+# RESOURCE USAGE (except WAL)
+#------------------------------------------------------------------------------
+# - Memory -
+shared_buffers = 128MB
+dynamic_shared_memory_type = posix
+# - Disk -
+# - Kernel Resources -
+# - Cost-Based Vacuum Delay -
+# - Background Writer -
+# - Asynchronous Behavior -
+#------------------------------------------------------------------------------
+# WRITE-AHEAD LOG
+#------------------------------------------------------------------------------
+# - Settings -
+wal_level = replica
+# - Checkpoints -
+max_wal_size = 1GB
+min_wal_size = 80MB
+# - Prefetching during recovery -
+# - Archiving -
+# - Archive Recovery -
+# - Recovery Target -
+#------------------------------------------------------------------------------
+# REPLICATION
+#------------------------------------------------------------------------------
+# - Sending Servers -
+# - Primary Server -
+# - Standby Servers -
+# - Subscribers -
+#------------------------------------------------------------------------------
+# QUERY TUNING
+#------------------------------------------------------------------------------
+# - Planner Method Configuration -
+# - Planner Cost Constants -
+# - Genetic Query Optimizer -
+# - Other Planner Options -
+#------------------------------------------------------------------------------
+# REPORTING AND LOGGING
+#------------------------------------------------------------------------------
+# - Where to Log -
+# - When to Log -
+# - What to Log -
+log_timezone = 'Asia/Shanghai'
+# - Process Title -
+#------------------------------------------------------------------------------
+# STATISTICS
+#------------------------------------------------------------------------------
+# - Cumulative Query and Index Statistics 
+# - Monitoring -
+#------------------------------------------------------------------------------
+# AUTOVACUUM
+#------------------------------------------------------------------------------
+autovacuum = off
+#------------------------------------------------------------------------------
+# CLIENT CONNECTION DEFAULTS
+#------------------------------------------------------------------------------
+# - Statement Behavior -
+# - Locale and Formatting -
+datestyle = 'iso, mdy'
+timezone = 'Asia/Shanghai'
+lc_messages = 'en_US.UTF-8'
+lc_monetary = 'en_US.UTF-8'
+lc_numeric = 'en_US.UTF-8'
+lc_time = 'en_US.UTF-8'
+default_text_search_config = 'pg_catalog.english'
+# - Shared Library Preloading -
+# - Other Defaults -
+#------------------------------------------------------------------------------
+# LOCK MANAGEMENT
+#------------------------------------------------------------------------------
+deadlock_timeout = 1s
+#------------------------------------------------------------------------------
+# VERSION AND PLATFORM COMPATIBILITY
+#------------------------------------------------------------------------------
+# - Previous PostgreSQL Versions -
+# - Other Platforms and Clients -
+#------------------------------------------------------------------------------
+# ERROR HANDLING
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+# CONFIG FILE INCLUDES
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+# CUSTOMIZED OPTIONS
+#------------------------------------------------------------------------------

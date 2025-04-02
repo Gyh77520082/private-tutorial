@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    k8s.kuboard.cn/layer: cloud
+    k8s.kuboard.cn/name: {{ .Values.redis.name }}
+  name: {{ .Values.redis.name }}
+  namespace:  {{ .Values.kubernetes.namespace }}
+spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      k8s.kuboard.cn/layer: cloud
+      k8s.kuboard.cn/name: {{ .Values.redis.name }}
+  serviceName: {{ .Values.redis.name }}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s.kuboard.cn/layer: cloud
+        k8s.kuboard.cn/name: {{ .Values.redis.name }}
+    spec:
+      containers:
+        - args:
+            - '--requirepass {{ .Values.redis.password }}'
+          command:
+            - redis-server
+          image: '10.10.114.5/gysk_basis/fs-smp-redis:v7.2.1'
+          imagePullPolicy: IfNotPresent
+          name: {{ .Values.redis.name }}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate

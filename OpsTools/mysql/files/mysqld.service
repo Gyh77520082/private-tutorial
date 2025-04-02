@@ -1,0 +1,18 @@
+[Unit]
+Description=MySQL Server
+Documentation=man:mysqld(8)
+Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html
+After=network.target
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+User=mysql
+Group=mysql
+TimeoutSec=0
+PermissionsStartOnly=true
+ExecStart=/usr/local/mysql/bin/mysqld_safe --defaults-file=/etc/my.cnf
+PrivateTmp=false

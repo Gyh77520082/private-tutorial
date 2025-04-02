@@ -1,0 +1,17 @@
+---
+- name: ping
+  hosts: xunjian
+  gather_facts: no
+  tags: ping
+  tasks:
+    - name: ping
+      ping:
+
+- name: xunjian
+  hosts: xunjian
+  gather_facts: no
+  vars_files:
+    - vars.yml
+  roles:
+    - role: xunjian
+      tags: xunjian

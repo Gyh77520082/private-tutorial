@@ -1,0 +1,8 @@
+---
+- name: template
+  template:
+    src: "{{ item }}"
+    dest: "{{ xunjian_dir }}/"
+  with_items:
+    - "./scripts/main.sh"
+    - "./scripts/function.sh"

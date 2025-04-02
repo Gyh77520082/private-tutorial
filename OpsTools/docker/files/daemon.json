@@ -1,0 +1,12 @@
+{
+    "registry-mirrors":[],
+    "data-root":"/var/lib/docker",
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "10m",
+        "max-file": "3"
+    },
+    "ipv6": false,
+    "fixed-cidr-v6": "",
+    "insecure-registries":[]
+}

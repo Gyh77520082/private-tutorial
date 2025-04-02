@@ -1,0 +1,14 @@
+[Unit]
+Description=Nacos Server
+After=network.target
+ 
+[Service]
+Environment="JAVA_HOME=/home/lmode/JDK/jdk1.8"
+Type=forking
+ExecStart=/home/lmode/soft/nacos/bin/startup.sh -m standalone
+ExecStop=/home/lmode/soft/nacos/bin/shutdown.sh
+User=lmode
+Restart=on-failure
+ 
+[Install]
+WantedBy=multi-user.target

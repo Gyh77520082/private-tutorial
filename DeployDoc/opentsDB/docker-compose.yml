@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  hbase:
+    image: harisekhon/hbase
+    container_name: hbase
+    ports:
+      - "2181:2181"
+      - "16010:16010"
+      - "16000:16000"
+      - "16020:16020"
+      - "16030:16030"
+    environment:
+      HBASE_MANAGES_ZK: "true"
+    volumes:
+      - hbase-data:/data
+
+  opentsdb:
+    image: petergrace/opentsdb-docker
+    container_name: opentsdb
+    ports:
+      - "4242:4242"
+    environment:
+      HBASE_TABLE: "tsdb"
+      HBASE_ZOOKEEPER_QUORUM: "hbase"
+    depends_on:
+      - hbase
+    command: /usr/local/bin/create_table.sh && /usr/local/bin/start_tsdb.sh
+    volumes:
+      - opentsdb-data:/data
+
+volumes:
+  hbase-data:
+  opentsdb-data:
